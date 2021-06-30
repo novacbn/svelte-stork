@@ -38,7 +38,6 @@
         "svelte": "^3.38.2"
     },
     "devDependencies": {
-        "@sveltejs/adapter-static": "^1.0.0-next.13",
         "@sveltejs/kit": "^1.0.0-next.119",
         "@tsconfig/svelte": "^2.0.1",
         "prettier": "^2.3.2",
