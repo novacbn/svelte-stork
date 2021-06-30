@@ -20,6 +20,7 @@
     "files": [
         "package/components",
         "package/stores",
+        "package/util",
         "package/types",
         "package/index.js",
         "package.json",
