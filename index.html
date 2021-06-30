@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge;" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+        <link rel="icon" href="/favicon.ico" />
+
+        <script type="application/javascript" src="/assets/scripts/stork.js"></script>
+
+        
+
+		
+
+		<link rel="modulepreload" href="/svelte-stork/_app/start-a3661967.js">
+		<link rel="modulepreload" href="/svelte-stork/_app/chunks/vendor-09cf0bef.js">
+		<link rel="modulepreload" href="/svelte-stork/_app/chunks/paths-45dac81d.js">
+		<link rel="modulepreload" href="/svelte-stork/_app/pages/__layout.svelte-45362b75.js">
+		<link rel="modulepreload" href="/svelte-stork/_app/pages/index.svelte-48f39e7a.js">
+		<link rel="stylesheet" href="/svelte-stork/_app/assets/start-a8cd1609.css">
+		<link rel="stylesheet" href="/svelte-stork/_app/assets/pages/__layout.svelte-a8cdc878.css">
+
+		<script type="module">
+			import { start } from "/svelte-stork/_app/start-a3661967.js";
+			start({
+				target: document.querySelector("body"),
+				paths: {"base":"/svelte-stork","assets":"/svelte-stork"},
+				session: {},
+				host: location.host,
+				route: true,
+				spa: false,
+				trailing_slash: "never",
+				hydrate: {
+					status: 200,
+					error: null,
+					nodes: [
+						import("/svelte-stork/_app/pages/__layout.svelte-45362b75.js"),
+						import("/svelte-stork/_app/pages/index.svelte-48f39e7a.js")
+					],
+					page: {
+						host: location.host, // TODO this is redundant
+						path: "/",
+						query: new URLSearchParams(""),
+						params: {}
+					}
+				}
+			});
+		</script>
+
+        <title>@novacbn/svelte-stork</title>
+    </head>
+
+    <body>
+        
+
+
+<nav class="nav"><div class="nav-left"><a href="/svelte-stork/" class="active">README</a>
+        <a href="/svelte-stork/demo">Demo</a></div>
+
+    <div class="nav-center"><a class="brand" href="/svelte-stork/"><code>@novacbn/svelte-stork</code></a></div>
+
+    <div class="nav-right"><a href="https://github.com/novacbn/svelte-stork" target="_blank" rel="noopener noreferrer">GitHub
+        </a></div></nav>
+
+<hr>
+
+<div class="container"><h1>svelte-stork</h1>
+<h2>Description</h2>
+<p>Minimalist Svelte wrapper Stores around <a href="https://github.com/jameslittle230/stork">Stork</a> search, also provides customizable Components.</p>
+<h2>Demo</h2>
+<p>See a demo of the Svelte Components at <a href="https://novacbn.github.io/svelte-stork">novacbn.github.io/svelte-stork</a>.</p>
+<h2>Getting Started</h2>
+<blockquote>
+<p><strong>NOTE</strong>: To learn how to build your own custom search indices and other concepts, visit the <a href="https://stork-search.net/docs">Stork documentation</a>.</p>
+</blockquote>
+<p>To get started with this library, you need to <a href="https://stork-search.net/docs/install">install Stork</a> on your Web Application. And make sure the <code>stork</code> global namespace available.</p>
+<h2>Usage</h2>
+<h3>Stores</h3>
+<pre class="language-javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span>register<span class="token punctuation">,</span> search<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"svelte-stork"</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Before we can do anything with search, you need to register</span>
+<span class="token comment">// your search index and Stork's WASM build. Which will be fetched</span>
+<span class="token comment">// from the network</span>
+<span class="token keyword">await</span> <span class="token function">register</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token comment">// All search indices are globally registered to the webpage, so</span>
+    <span class="token comment">// you need to choose a unique name. Preferably versioned as well</span>
+    index_name<span class="token operator">:</span> <span class="token string">"my-search-index_v1.0.0"</span><span class="token punctuation">,</span>
+
+    <span class="token comment">// Search index and WASM blob be self-hosted or using Stork's CDN</span>
+    index_url<span class="token operator">:</span> <span class="token string">"/path/to/search_index.v1.0.0.st"</span><span class="token punctuation">,</span>
+    wasm_url<span class="token operator">:</span> <span class="token string">"/path/to/stork.wasm"</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Now if we registered successfully, we can create our Svelte Store</span>
+<span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token function">search</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token comment">// You can customize how long in milliseconds the Store after</span>
+    <span class="token comment">// receiving input to update the query results</span>
+    <span class="token comment">//</span>
+    <span class="token comment">// DEFAULT: 250ms (0.25s)</span>
+    debounce<span class="token operator">:</span> <span class="token number">250</span><span class="token punctuation">,</span>
+
+    <span class="token comment">// You also need to reference your registered search index</span>
+    index_name<span class="token operator">:</span> <span class="token string">"my-search-index_v1.0.0"</span><span class="token punctuation">,</span>
+
+    <span class="token comment">// Lastly, you can customize the minimum amount of characters a</span>
+    <span class="token comment">// end-user needs to input before queries are performed</span>
+    <span class="token comment">//</span>
+    <span class="token comment">// DEFAULT: 3 (three characters)</span>
+    minimum_length<span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Like any other Svelte Store, we update the input query via `set`</span>
+store<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token string">"my search query"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Also subscriptions</span>
+store<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">query</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token comment">// Finally retrieve your query results, visit the link below to see the typings</span>
+    <span class="token comment">// https://github.com/novacbn/svelte-stork/blob/e8fe53ccdf0547a568b6f7e1cd59aad0ba22499d/src/lib/stores/search.ts#L95-L110</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>query<span class="token punctuation">.</span>results<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3>Components</h3>
+<!-- prettier-ignore -->
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>register<span class="token punctuation">,</span> search<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"svelte-stork"</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> Stork <span class="token keyword">from</span> <span class="token string">"svelte-stork/components"</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// Initialized the exact same way as the above example</span>
+    <span class="token keyword">const</span> registration_promise <span class="token operator">=</span> <span class="token function">register</span><span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token function">search</span><span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">let</span> value <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// After the initial configuration / load, it's really simple to get started. Just</span>
+    <span class="token comment">// use Svelte's reactive blocks pattern to update from input and listen for query results</span>
+    $<span class="token operator">:</span> $store <span class="token operator">=</span> value<span class="token punctuation">;</span>
+    $<span class="token operator">:</span> query <span class="token operator">=</span> $store<span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+
+<span class="token comment">&lt;!--
+    Before we can render the search UI and results, we need to
+    wait for the WASM blob to load and the search index to be
+    registered
+--></span>
+{#await registration_promise}
+    Loading search index...
+{:then}
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>...search<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">bind:</span>value</span> <span class="token punctuation">/></span></span>
+
+    <span class="token comment">&lt;!-- Now we can just pass in the query output into the premade basic search UI --></span>
+    {#if query}
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Stork.Output</span> <span class="token attr-name">{query}</span> <span class="token punctuation">/></span></span>
+    {/if}
+{/await}
+</code></pre>
+<h2>Developer</h2>
+<h3>Installation</h3>
+<p>Open your terminal and install via <code>npm</code>:</p>
+<pre class="language-sh"><code class="language-sh">npm install github:novacbn/svelte-stork#0.0.1
+</code></pre>
+<p>Install current in-development code:</p>
+<pre class="language-sh"><code class="language-sh">npm install github:novacbn/svelte-stork
+</code></pre>
+<h3>Documentation</h3>
+<blockquote>
+<p>TODO</p>
+</blockquote>
+<h3>CSS Custom Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--svelte-stork-attribution-padding</code></td>
+<td><code>0.75rem 1rem</code></td>
+</tr>
+<tr>
+<td><code>--svelte-stork-entry-padding</code></td>
+<td><code>0.5rem 0.5rem</code></td>
+</tr>
+<tr>
+<td><code>--svelte-stork-entry-hover-background-color</code></td>
+<td><code>hsl(192, 82%, 78%)</code></td>
+</tr>
+<tr>
+<td><code>--svelte-stork-entry-spacing</code></td>
+<td><code>0.125em</code></td>
+</tr>
+<tr>
+<td><code>--svelte-stork-entry-title-spacing</code></td>
+<td><code>0.125em</code></td>
+</tr>
+<tr>
+<td><code>--svelte-stork-entry-title-font-size</code></td>
+<td><code>1.75rem</code></td>
+</tr>
+<tr>
+<td><code>--svelte-stork-entry-title-font-weight</code></td>
+<td><code>bold</code></td>
+</tr>
+<tr>
+<td><code>--svelte-stork-excerpt-padding</code></td>
+<td><code>0 0.75em</code></td>
+</tr>
+<tr>
+<td><code>--svelte-stork-highlight-background-color</code></td>
+<td><code>hsl(59, 98%, 58%)</code></td>
+</tr>
+<tr>
+<td><code>--svelte-stork-message-padding</code></td>
+<td><code>0.75rem 1rem</code></td>
+</tr>
+<tr>
+<td><code>--svelte-stork-message-font-size</code></td>
+<td><code>2rem</code></td>
+</tr>
+<tr>
+<td><code>--svelte-stork-message-opacity</code></td>
+<td><code>0.85</code></td>
+</tr>
+<tr>
+<td><code>--svelte-stork-output-max-height</code></td>
+<td><code>auto</code></td>
+</tr>
+<tr>
+<td><code>--svelte-stork-results-border</code></td>
+<td><code>1px solid currentColor</code></td>
+</tr>
+<tr>
+<td><code>--svelte-stork-results-spacing</code></td>
+<td><code>0.5rem</code></td>
+</tr>
+</tbody>
+</table>
+<h3>API</h3>
+<ul>
+<li>
+<p>Functions</p>
+<ul>
+<li><code>register</code></li>
+</ul>
+</li>
+<li>
+<p>Stores</p>
+<ul>
+<li><code>search</code></li>
+</ul>
+</li>
+<li>
+<p>Components</p>
+<ul>
+<li>
+<p><code>Output</code></p>
+</li>
+<li>
+<p><code>Message</code></p>
+</li>
+<li>
+<p><code>Attribution</code></p>
+</li>
+<li>
+<p><code>Highlight</code></p>
+</li>
+<li>
+<p><code>Result</code></p>
+</li>
+<li>
+<p><code>Results</code></p>
+</li>
+<li>
+<p><code>Entry</code></p>
+</li>
+<li>
+<p><code>EntryTitle</code></p>
+</li>
+<li>
+<p><code>Excerpt</code></p>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+
+
+
+	
+
+    </body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge;" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+        <link rel="icon" href="/favicon.ico" />
+
+        <script type="application/javascript" src="/assets/scripts/stork.js"></script>
+
+        
+
+		
+
+		<link rel="modulepreload" href="/svelte-stork/_app/start-a3661967.js">
+		<link rel="modulepreload" href="/svelte-stork/_app/chunks/vendor-09cf0bef.js">
+		<link rel="modulepreload" href="/svelte-stork/_app/chunks/paths-45dac81d.js">
+		<link rel="modulepreload" href="/svelte-stork/_app/pages/__layout.svelte-45362b75.js">
+		<link rel="modulepreload" href="/svelte-stork/_app/pages/demo.svelte-64f12563.js">
+		<link rel="stylesheet" href="/svelte-stork/_app/assets/start-a8cd1609.css">
+		<link rel="stylesheet" href="/svelte-stork/_app/assets/pages/__layout.svelte-a8cdc878.css">
+		<link rel="stylesheet" href="/svelte-stork/_app/assets/pages/demo.svelte-4959e780.css">
+
+		<script type="module">
+			import { start } from "/svelte-stork/_app/start-a3661967.js";
+			start({
+				target: document.querySelector("body"),
+				paths: {"base":"/svelte-stork","assets":"/svelte-stork"},
+				session: {},
+				host: location.host,
+				route: true,
+				spa: false,
+				trailing_slash: "never",
+				hydrate: {
+					status: 200,
+					error: null,
+					nodes: [
+						import("/svelte-stork/_app/pages/__layout.svelte-45362b75.js"),
+						import("/svelte-stork/_app/pages/demo.svelte-64f12563.js")
+					],
+					page: {
+						host: location.host, // TODO this is redundant
+						path: "/demo",
+						query: new URLSearchParams(""),
+						params: {}
+					}
+				}
+			});
+		</script>
+
+        <title>@novacbn/svelte-stork</title>
+    </head>
+
+    <body>
+        
+
+
+<nav class="nav"><div class="nav-left"><a href="/svelte-stork/">README</a>
+        <a href="/svelte-stork/demo" class="active">Demo</a></div>
+
+    <div class="nav-center"><a class="brand" href="/svelte-stork/"><code>@novacbn/svelte-stork</code></a></div>
+
+    <div class="nav-right"><a href="https://github.com/novacbn/svelte-stork" target="_blank" rel="noopener noreferrer">GitHub
+        </a></div></nav>
+
+<hr>
+
+<div class="container"><div class="card bd-error text-error"><p>Your client currently does not support Javascript, or is otherwise disabled.</p></div>
+</div>
+
+
+
+	
+
+    </body>
+</html>
