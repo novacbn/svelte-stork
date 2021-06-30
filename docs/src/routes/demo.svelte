@@ -17,6 +17,7 @@
         ? register({
               index_name: "federalist-stork-1.2.1",
               index_url: base + "/assets/stork/federalist-stork-1.2.1.st",
+              overwrite: true,
               wasm_url: base + "/assets/scripts/stork.wasm",
           })
         : false;
@@ -72,6 +73,9 @@
     {:catch err}
         <div class="card bd-error text-error">
             <p>There was an error while loading the search index.</p>
+
+            <!-- prettier-ignore -->
+            <pre><code>{err.message}</code></pre>
         </div>
     {/await}
 {:else}

@@ -20,6 +20,12 @@ export interface IRegisterOptions {
     index_url: string;
 
     /**
+     * Represents if the search index being registered should overwrite
+     * any existing indices under the same name. Instead of erroring out
+     */
+    overwrite: boolean;
+
+    /**
      * Represents the URL used to download and initialize the
      * WASM build of Stork
      */
@@ -142,7 +148,7 @@ export interface IStorkStore {
 }
 
 export async function register(options: IRegisterOptions): Promise<void> {
-    const {index_name, index_url, wasm_url} = options;
+    const {index_name, index_url, overwrite = false, wasm_url} = options;
     const stork = (window as any).stork;
     if (!stork) {
         // TODO: Standardize error object
@@ -160,7 +166,7 @@ export async function register(options: IRegisterOptions): Promise<void> {
     }
 
     try {
-        await stork.downloadIndex(index_name, index_url);
+        await stork.downloadIndex(index_name, index_url, {forceOverwrite: overwrite});
     } catch (err) {
         // TODO: Look into what exceptions this spits out
         // and provide standardized error object

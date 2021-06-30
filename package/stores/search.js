@@ -1,7 +1,7 @@
 import { get, readable, writable } from "svelte/store";
 import { debounce } from "../util/functional";
 export async function register(options) {
-    const { index_name, index_url, wasm_url } = options;
+    const { index_name, index_url, overwrite = false, wasm_url } = options;
     const stork = window.stork;
     if (!stork) {
         // TODO: Standardize error object
@@ -16,7 +16,7 @@ export async function register(options) {
         throw new Error("bad option 'IRegisterOptions.wasm_url' to 'register' (failed to download and initialize WASM blob)");
     }
     try {
-        await stork.downloadIndex(index_name, index_url);
+        await stork.downloadIndex(index_name, index_url, { forceOverwrite: overwrite });
     }
     catch (err) {
         // TODO: Look into what exceptions this spits out

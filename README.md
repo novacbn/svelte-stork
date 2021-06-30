@@ -106,13 +106,13 @@ store.subscribe((query) => {
 
 Open your terminal and install via `npm`:
 
-```sh
-npm install github:novacbn/svelte-stork#0.0.1
+```bash
+npm install github:novacbn/svelte-stork#0.0.2
 ```
 
 Install current in-development code:
 
-```sh
+```bash
 npm install github:novacbn/svelte-stork
 ```
 
