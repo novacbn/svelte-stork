@@ -13,7 +13,7 @@ export default {
         target: "body",
 
         paths: {
-            //base: "/svelte-image-crop",
+            base: "/svelte-stork",
         },
 
         vite: () => {

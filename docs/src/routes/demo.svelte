@@ -16,8 +16,8 @@
     let registering = browser
         ? register({
               index_name: "federalist-stork-1.2.1",
-              index_url: base + "assets/stork/federalist-stork-1.2.1.st",
-              wasm_url: base + "assets/scripts/stork.wasm",
+              index_url: base + "/assets/stork/federalist-stork-1.2.1.st",
+              wasm_url: base + "/assets/scripts/stork.wasm",
           })
         : false;
 
