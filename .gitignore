@@ -1,0 +1,8 @@
+node_modules/
+package/package.json
+package/README.md
+
+/docs/.svelte-kit
+/docs/build
+/docs/node_modules
+/docs/static/assets/stork/federalist-stork-1.2.1.st
