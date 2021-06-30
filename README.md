@@ -12,7 +12,7 @@ See a demo of the Svelte Components at [novacbn.github.io/svelte-stork](https://
 
 > **NOTE**: To learn how to build your own custom search indices and other concepts, visit the [Stork documentation](https://stork-search.net/docs).
 
-To get started with this library, you need to [install Stork](https://stork-search.net/docs/install) on Web Application. And make sure the `stork` global namespace available.
+To get started with this library, you need to [install Stork](https://stork-search.net/docs/install) on your Web Application. And make sure the `stork` global namespace available.
 
 ## Usage
 
@@ -120,6 +120,26 @@ npm install github:novacbn/svelte-stork
 
 > TODO
 
+### CSS Custom Properties
+
+| Name                                          | Default                  |
+| --------------------------------------------- | ------------------------ |
+| `--svelte-stork-attribution-padding`          | `0.75rem 1rem`           |
+| `--svelte-stork-entry-padding`                | `0.5rem 0.5rem`          |
+| `--svelte-stork-entry-hover-background-color` | `hsl(192, 82%, 78%)`     |
+| `--svelte-stork-entry-spacing`                | `0.125em`                |
+| `--svelte-stork-entry-title-spacing`          | `0.125em`                |
+| `--svelte-stork-entry-title-font-size`        | `1.75rem`                |
+| `--svelte-stork-entry-title-font-weight`      | `bold`                   |
+| `--svelte-stork-excerpt-padding`              | `0 0.75em`               |
+| `--svelte-stork-highlight-background-color`   | `hsl(59, 98%, 58%)`      |
+| `--svelte-stork-message-padding`              | `0.75rem 1rem`           |
+| `--svelte-stork-message-font-size`            | `2rem`                   |
+| `--svelte-stork-message-opacity`              | `0.85`                   |
+| `--svelte-stork-output-max-height`            | `auto`                   |
+| `--svelte-stork-results-border`               | `1px solid currentColor` |
+| `--svelte-stork-results-spacing`              | `0.5rem`                 |
+
 ### API
 
 -   Functions
@@ -145,5 +165,3 @@ npm install github:novacbn/svelte-stork
     -   `Entry`
     -   `EntryTitle`
     -   `Excerpt`
-
-### CSS Custom Properties
