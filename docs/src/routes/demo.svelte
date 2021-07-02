@@ -1,55 +1,62 @@
 <script context="module">
-    function sort_score(a, b) {
-        return a.score < b.score;
+    import {base} from "$app/paths";
+    import {initialize, register} from "@novacbn/svelte-stork";
+
+    let PROMISE_INITIALIZE = null;
+
+    let PROMISE_REGISTER = null;
+
+    function initialize_stork() {
+        if (!PROMISE_INITIALIZE) {
+            PROMISE_INITIALIZE = initialize({
+                script_url: `${base}/assets/stork/stork-v1.2.1.js`,
+                wasm_url: `${base}/assets/stork/stork-v1.2.1.wasm`,
+            });
+        }
+
+        return PROMISE_INITIALIZE;
+    }
+
+    function register_stork() {
+        if (!PROMISE_REGISTER) {
+            PROMISE_REGISTER = register({
+                index_name: "federalist-stork-1.2.1",
+                index_url: `${base}/assets/stork/federalist-stork-v1.2.1.st`,
+            });
+        }
+
+        return PROMISE_REGISTER;
     }
 </script>
 
 <script>
     import {browser} from "$app/env";
-    import {base} from "$app/paths";
 
-    import {register, search} from "@novacbn/svelte-stork";
+    import {search} from "@novacbn/svelte-stork";
     import * as Stork from "@novacbn/svelte-stork/components";
 
     let value = "";
 
-    let registering = browser
-        ? register({
-              index_name: "federalist-stork-1.2.1",
-              index_url: base + "/assets/stork/federalist-stork-1.2.1.st",
-              overwrite: true,
-              wasm_url: base + "/assets/scripts/stork.wasm",
-          })
-        : false;
+    async function await_initialize() {
+        await initialize_stork();
+        await register_stork();
 
-    const store = search({
-        index_name: "federalist-stork-1.2.1",
-    });
-
-    $: if (browser) $store = value;
-
-    let _results = [];
-    let _query = null;
-    $: {
-        _query = $store;
-        if (_query) {
-            _results = _query.results.map((result) => {
-                let {excerpts} = result;
-                excerpts = excerpts.slice(0, 3);
-
-                excerpts.sort(sort_score);
-                return {...result, excerpts};
-            });
-
-            _results.sort(sort_score);
-        }
+        _store = search({
+            index_name: "federalist-stork-1.2.1",
+        });
     }
+
+    let initializing = browser ? await_initialize() : null;
+
+    let _store, _query;
+    $: if (_store) $_store = value;
+    $: if (_store) _query = $_store;
 </script>
 
 {#if browser}
-    {#await registering}
+    {#await initializing}
         <div class="card bd-primary text-primary">
-            <p>Loading search index...</p>
+            <p>Loading Stork Search / search index...</p>
         </div>
     {:then _}
         <label for="search">
@@ -65,11 +72,9 @@
 
         <small>* Well, just the first twenty.</small>
 
-        {#if _query}
-            <div class="card is-paddingless">
-                <Stork.Output query={_query} results={_results} />
-            </div>
-        {/if}
+        <div class="card is-paddingless">
+            <Stork.Output excerpts_maximum={3} query={_query} />
+        </div>
     {:catch err}
         <div class="card bd-error text-error">
             <p>There was an error while loading the search index.</p>
@@ -86,10 +91,10 @@
 
 <style>
     :global(:root) {
-        --svelte-stork-output-max-height: min(65ex, 70vh);
+        --svst-output-max-height: min(65ex, 70vh);
     }
 
-    :global(.svelte-stork-entry:hover) {
+    :global(.svst-entry:hover) {
         /** HACK: Need to prevent Chota from messing with the Component style */
         opacity: 1 !important;
     }
