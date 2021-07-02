@@ -69,7 +69,7 @@ store.set("my search query");
 // Also subscriptions
 store.subscribe((query) => {
     // Finally retrieve your query results, visit the link below to see the typings
-    // https://github.com/novacbn/svelte-stork/blob/e8fe53ccdf0547a568b6f7e1cd59aad0ba22499d/src/lib/stores/search.ts#L95-L110
+    // https://github.com/novacbn/svelte-stork/blob/afc328ca576f83a7c903027f0b117f5a1a566f12/src/lib/stores/search.ts#L115-L130
     console.log(query.results);
 });
 ```
