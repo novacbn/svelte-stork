@@ -11,16 +11,16 @@
 
 		
 
-		<link rel="modulepreload" href="/svelte-stork/_app/start-8bf02b6d.js">
+		<link rel="modulepreload" href="/svelte-stork/_app/start-276dc792.js">
 		<link rel="modulepreload" href="/svelte-stork/_app/chunks/vendor-5862df20.js">
 		<link rel="modulepreload" href="/svelte-stork/_app/chunks/paths-45dac81d.js">
 		<link rel="modulepreload" href="/svelte-stork/_app/pages/__layout.svelte-df042d84.js">
-		<link rel="modulepreload" href="/svelte-stork/_app/pages/index.svelte-6e3c9cd2.js">
+		<link rel="modulepreload" href="/svelte-stork/_app/pages/index.svelte-05999441.js">
 		<link rel="stylesheet" href="/svelte-stork/_app/assets/start-a8cd1609.css">
 		<link rel="stylesheet" href="/svelte-stork/_app/assets/pages/__layout.svelte-a8cdc878.css">
 
 		<script type="module">
-			import { start } from "/svelte-stork/_app/start-8bf02b6d.js";
+			import { start } from "/svelte-stork/_app/start-276dc792.js";
 			start({
 				target: document.querySelector("body"),
 				paths: {"base":"/svelte-stork","assets":"/svelte-stork"},
@@ -34,7 +34,7 @@
 					error: null,
 					nodes: [
 						import("/svelte-stork/_app/pages/__layout.svelte-df042d84.js"),
-						import("/svelte-stork/_app/pages/index.svelte-6e3c9cd2.js")
+						import("/svelte-stork/_app/pages/index.svelte-05999441.js")
 					],
 					page: {
 						host: location.host, // TODO this is redundant
@@ -169,7 +169,7 @@ store<span class="token punctuation">.</span><span class="token function">subscr
 <h2>Developer</h2>
 <h3>Installation</h3>
 <p>Open your terminal and install via <code>npm</code>:</p>
-<pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> github:novacbn/svelte-stork<span class="token comment">#0.0.3</span>
+<pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> github:novacbn/svelte-stork<span class="token comment">#0.0.4</span>
 </code></pre>
 <p>Install current in-development code:</p>
 <pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> github:novacbn/svelte-stork
@@ -189,7 +189,7 @@ store<span class="token punctuation">.</span><span class="token function">subscr
 <tbody>
 <tr>
 <td><code>--svst-attribution-color</code></td>
-<td><code>hsla(0, 0%, 0%, 0.8)</code></td>
+<td><code>currentColor</code></td>
 </tr>
 <tr>
 <td><code>--svst-attribution-font-size</code></td>
@@ -198,6 +198,10 @@ store<span class="token punctuation">.</span><span class="token function">subscr
 <tr>
 <td><code>--svst-attribution-padding</code></td>
 <td><code>0.5rem 1em</code></td>
+</tr>
+<tr>
+<td><code>--svst-attribution-opacity</code></td>
+<td><code>0.8</code></td>
 </tr>
 <tr>
 <td><code>--svst-attribution-text-decoration</code></td>
@@ -285,7 +289,7 @@ store<span class="token punctuation">.</span><span class="token function">subscr
 </tr>
 <tr>
 <td><code>--svst-message-color</code></td>
-<td><code>hsla(0, 0%, 0%, 0.8)</code></td>
+<td><code>currentColor</code></td>
 </tr>
 <tr>
 <td><code>--svst-message-padding</code></td>
@@ -294,6 +298,10 @@ store<span class="token punctuation">.</span><span class="token function">subscr
 <tr>
 <td><code>--svst-message-font-size</code></td>
 <td><code>1em</code></td>
+</tr>
+<tr>
+<td><code>--svst-message-opacity</code></td>
+<td><code>0.8</code></td>
 </tr>
 <tr>
 <td><hr /></td>
