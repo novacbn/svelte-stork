@@ -17,8 +17,10 @@
     :global(.svst-attribution) {
         padding: var(--svst-attribution-padding, 0.5em 1em);
 
-        color: var(--svst-attribution-color, hsla(0, 0%, 0%, 0.8));
+        color: var(--svst-attribution-color, currentColor);
         font-size: var(--svst-attribution-font-size, 0.8em);
+
+        opacity: var(--svst-attribution-opacity, 0.8);
     }
 
     :global(.svst-attribution > a) {

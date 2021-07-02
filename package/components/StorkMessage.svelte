@@ -13,7 +13,7 @@
 
 <div bind:this={element} class="svst-message {_class}" {style}>
     {#if results.length > 0}
-        {results.length} files found.
+        {results.length} results found.
     {:else}
         No files found.
     {/if}
@@ -23,7 +23,9 @@
     :global(.svst-message) {
         padding: var(--svst-message-padding, 0.5em 1em);
 
-        color: var(--svst-message-color, hsla(0, 0%, 0%, 0.8));
+        color: var(--svst-message-color, currentColor);
         font-size: var(--svst-message-font-size, 1em);
+
+        opacity: var(--svst-message-opacity, 0.8);
     }
 </style>
