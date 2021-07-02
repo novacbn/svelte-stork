@@ -7,22 +7,20 @@
 
         <link rel="icon" href="/favicon.ico" />
 
-        <script type="application/javascript" src="/svelte-stork/assets/scripts/stork.js"></script>
-
         
 
 		
 
-		<link rel="modulepreload" href="/svelte-stork/_app/start-22434b96.js">
-		<link rel="modulepreload" href="/svelte-stork/_app/chunks/vendor-09cf0bef.js">
+		<link rel="modulepreload" href="/svelte-stork/_app/start-8bf02b6d.js">
+		<link rel="modulepreload" href="/svelte-stork/_app/chunks/vendor-5862df20.js">
 		<link rel="modulepreload" href="/svelte-stork/_app/chunks/paths-45dac81d.js">
-		<link rel="modulepreload" href="/svelte-stork/_app/pages/__layout.svelte-45362b75.js">
-		<link rel="modulepreload" href="/svelte-stork/_app/pages/index.svelte-9019aee9.js">
+		<link rel="modulepreload" href="/svelte-stork/_app/pages/__layout.svelte-df042d84.js">
+		<link rel="modulepreload" href="/svelte-stork/_app/pages/index.svelte-6e3c9cd2.js">
 		<link rel="stylesheet" href="/svelte-stork/_app/assets/start-a8cd1609.css">
 		<link rel="stylesheet" href="/svelte-stork/_app/assets/pages/__layout.svelte-a8cdc878.css">
 
 		<script type="module">
-			import { start } from "/svelte-stork/_app/start-22434b96.js";
+			import { start } from "/svelte-stork/_app/start-8bf02b6d.js";
 			start({
 				target: document.querySelector("body"),
 				paths: {"base":"/svelte-stork","assets":"/svelte-stork"},
@@ -35,8 +33,8 @@
 					status: 200,
 					error: null,
 					nodes: [
-						import("/svelte-stork/_app/pages/__layout.svelte-45362b75.js"),
-						import("/svelte-stork/_app/pages/index.svelte-9019aee9.js")
+						import("/svelte-stork/_app/pages/__layout.svelte-df042d84.js"),
+						import("/svelte-stork/_app/pages/index.svelte-6e3c9cd2.js")
 					],
 					page: {
 						host: location.host, // TODO this is redundant
@@ -67,32 +65,43 @@
 
 <div class="container"><h1>svelte-stork</h1>
 <h2>Description</h2>
-<p>Minimalist Svelte wrapper Stores around <a href="https://github.com/jameslittle230/stork">Stork</a> search, also provides customizable Components.</p>
+<p>Minimalist Svelte wrapper Stores around <a href="https://github.com/jameslittle230/stork">Stork Search</a>, also provides customizable Components.</p>
 <h2>Demo</h2>
 <p>See a demo of the Svelte Components at <a href="https://novacbn.github.io/svelte-stork">novacbn.github.io/svelte-stork</a>.</p>
 <h2>Getting Started</h2>
 <blockquote>
 <p><strong>NOTE</strong>: To learn how to build your own custom search indices and other concepts, visit the <a href="https://stork-search.net/docs">Stork documentation</a>.</p>
 </blockquote>
-<p>To get started with this library, you need to <a href="https://stork-search.net/docs/install">install Stork</a> on your Web Application. And make sure the <code>stork</code> global namespace available.</p>
+<p>To get started with this library, you need to <a href="https://stork-search.net/docs/install">install Stork Search</a> on your Web Application. Alternatively, see the below sample on how to have this library handle that for you.</p>
 <h2>Usage</h2>
 <h3>Stores</h3>
-<pre class="language-javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span>register<span class="token punctuation">,</span> search<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"svelte-stork"</span><span class="token punctuation">;</span>
+<pre class="language-javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span>initialize<span class="token punctuation">,</span> register<span class="token punctuation">,</span> search<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"svelte-stork"</span><span class="token punctuation">;</span>
 
-<span class="token comment">// Before we can do anything with search, you need to register</span>
-<span class="token comment">// your search index and Stork's WASM build. Which will be fetched</span>
-<span class="token comment">// from the network</span>
+<span class="token comment">// Before we can do anything with `search`, you need to</span>
+<span class="token comment">// initialize Stork Search</span>
+<span class="token keyword">await</span> <span class="token function">initialize</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token comment">// If you want this library to handle mounting / loading</span>
+    <span class="token comment">// of the main Stork JS library after page load, you can</span>
+    <span class="token comment">// uncomment the following line</span>
+    <span class="token comment">//</span>
+    <span class="token comment">// script_url: "/path/to/stork.js",</span>
+
+    <span class="token comment">// The WASM blob is not optional however, due to how</span>
+    <span class="token comment">// Browsers handle loading them</span>
+    wasm_url<span class="token operator">:</span> <span class="token string">"/path/to/stork.wasm"</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Next, you need to register your search index with Stork Search</span>
 <span class="token keyword">await</span> <span class="token function">register</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
     <span class="token comment">// All search indices are globally registered to the webpage, so</span>
     <span class="token comment">// you need to choose a unique name. Preferably versioned as well</span>
     index_name<span class="token operator">:</span> <span class="token string">"my-search-index_v1.0.0"</span><span class="token punctuation">,</span>
 
-    <span class="token comment">// Search index and WASM blob be self-hosted or using Stork's CDN</span>
+    <span class="token comment">// Make sure this path publically accessible</span>
     index_url<span class="token operator">:</span> <span class="token string">"/path/to/search_index.v1.0.0.st"</span><span class="token punctuation">,</span>
-    wasm_url<span class="token operator">:</span> <span class="token string">"/path/to/stork.wasm"</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token comment">// Now if we registered successfully, we can create our Svelte Store</span>
+<span class="token comment">// Now if we initialized and registered successfully, we can create the Svelte Store</span>
 <span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token function">search</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
     <span class="token comment">// You can customize how long in milliseconds the Store after</span>
     <span class="token comment">// receiving input to update the query results</span>
@@ -116,18 +125,20 @@ store<span class="token punctuation">.</span><span class="token function">set</s
 <span class="token comment">// Also subscriptions</span>
 store<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">query</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
     <span class="token comment">// Finally retrieve your query results, visit the link below to see the typings</span>
-    <span class="token comment">// https://github.com/novacbn/svelte-stork/blob/e8fe53ccdf0547a568b6f7e1cd59aad0ba22499d/src/lib/stores/search.ts#L95-L110</span>
+    <span class="token comment">// https://github.com/novacbn/svelte-stork/blob/afc328ca576f83a7c903027f0b117f5a1a566f12/src/lib/stores/search.ts#L115-L130</span>
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>query<span class="token punctuation">.</span>results<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <h3>Components</h3>
+<blockquote>
+<p><strong>NOTE</strong>: This sample expects initialization / registration of Stork Search was already performed.</p>
+</blockquote>
 <!-- prettier-ignore -->
 <pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
-    <span class="token keyword">import</span> <span class="token punctuation">{</span>register<span class="token punctuation">,</span> search<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"svelte-stork"</span><span class="token punctuation">;</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span>search<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"svelte-stork"</span><span class="token punctuation">;</span>
     <span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> Stork <span class="token keyword">from</span> <span class="token string">"svelte-stork/components"</span><span class="token punctuation">;</span>
 
-    <span class="token comment">// Initialized the exact same way as the above example</span>
-    <span class="token keyword">const</span> registration_promise <span class="token operator">=</span> <span class="token function">register</span><span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// Just input the same options you passed into the Javascript sample</span>
     <span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token function">search</span><span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token keyword">let</span> value <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
@@ -138,26 +149,27 @@ store<span class="token punctuation">.</span><span class="token function">subscr
     $<span class="token operator">:</span> query <span class="token operator">=</span> $store<span class="token punctuation">;</span>
 </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
 
-<span class="token comment">&lt;!--
-    Before we can render the search UI and results, we need to
-    wait for the WASM blob to load and the search index to be
-    registered
---></span>
-{#await registration_promise}
-    Loading search index...
-{:then}
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>...search<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">bind:</span>value</span> <span class="token punctuation">/></span></span>
 
-    <span class="token comment">&lt;!-- Now we can just pass in the query output into the premade basic search UI --></span>
-    {#if query}
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Stork.Output</span> <span class="token attr-name">{query}</span> <span class="token punctuation">/></span></span>
-    {/if}
-{/await}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>...search<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">bind:</span>value</span> <span class="token punctuation">/></span></span>
+
+<span class="token comment">&lt;!--
+    Now we can just pass in the query output into the built-in basic search UI
+
+    Properties:
+        - `excerpts_maximum` / `results_maximum` — When set greater than `-1`, they limit the respective amount of
+        excerpts and results items displayed in search outputs
+--></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Stork.Output</span>
+    <span class="token attr-name">excerpts_maximum</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span>{-1}</span>
+    <span class="token attr-name">results_maximum</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span>{-1}</span> 
+    <span class="token attr-name">{query}</span>
+<span class="token punctuation">/></span></span>
 </code></pre>
 <h2>Developer</h2>
 <h3>Installation</h3>
 <p>Open your terminal and install via <code>npm</code>:</p>
-<pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> github:novacbn/svelte-stork<span class="token comment">#0.0.2</span>
+<pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> github:novacbn/svelte-stork<span class="token comment">#0.0.3</span>
 </code></pre>
 <p>Install current in-development code:</p>
 <pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> github:novacbn/svelte-stork
@@ -176,64 +188,156 @@ store<span class="token punctuation">.</span><span class="token function">subscr
 </thead>
 <tbody>
 <tr>
-<td><code>--svelte-stork-attribution-padding</code></td>
-<td><code>0.75rem 1rem</code></td>
+<td><code>--svst-attribution-color</code></td>
+<td><code>hsla(0, 0%, 0%, 0.8)</code></td>
 </tr>
 <tr>
-<td><code>--svelte-stork-entry-padding</code></td>
-<td><code>0.5rem 0.5rem</code></td>
+<td><code>--svst-attribution-font-size</code></td>
+<td><code>0.8em</code></td>
 </tr>
 <tr>
-<td><code>--svelte-stork-entry-hover-background-color</code></td>
+<td><code>--svst-attribution-padding</code></td>
+<td><code>0.5rem 1em</code></td>
+</tr>
+<tr>
+<td><code>--svst-attribution-text-decoration</code></td>
+<td><code>underline</code></td>
+</tr>
+<tr>
+<td><code>--svst-attribution-hover-opacity</code></td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>--svst-attribution-link-color</code></td>
+<td><code>hsl(192, 82%, 44%)</code></td>
+</tr>
+<tr>
+<td><code>--svst-attribution-visited-color</code></td>
+<td><code>hsl(271, 63%, 34%)</code></td>
+</tr>
+<tr>
+<td><hr /></td>
+<td><hr /></td>
+</tr>
+<tr>
+<td><code>--svst-entry-color</code></td>
+<td><code>currentColor</code></td>
+</tr>
+<tr>
+<td><code>--svst-entry-cursor</code></td>
+<td><code>pointer</code></td>
+</tr>
+<tr>
+<td><code>--svst-entry-padding</code></td>
+<td><code>1em</code></td>
+</tr>
+<tr>
+<td><code>--svst-entry-text-decoration</code></td>
+<td><code>none</code></td>
+</tr>
+<tr>
+<td><code>--svst-entry-hover-background-color</code></td>
 <td><code>hsl(192, 82%, 78%)</code></td>
 </tr>
 <tr>
-<td><code>--svelte-stork-entry-spacing</code></td>
-<td><code>0.125em</code></td>
+<td><code>--svst-entry-hover-opacity</code></td>
+<td><code>1</code></td>
 </tr>
 <tr>
-<td><code>--svelte-stork-entry-title-spacing</code></td>
-<td><code>0.125em</code></td>
+<td><hr /></td>
+<td><hr /></td>
 </tr>
 <tr>
-<td><code>--svelte-stork-entry-title-font-size</code></td>
-<td><code>1.75rem</code></td>
+<td><code>--svst-entry-title-spacing</code></td>
+<td><code>0.8em</code></td>
 </tr>
 <tr>
-<td><code>--svelte-stork-entry-title-font-weight</code></td>
+<td><code>--svst-entry-title-font-size</code></td>
+<td><code>1.1em</code></td>
+</tr>
+<tr>
+<td><code>--svst-entry-title-font-weight</code></td>
 <td><code>bold</code></td>
 </tr>
 <tr>
-<td><code>--svelte-stork-excerpt-padding</code></td>
-<td><code>0 0.75em</code></td>
+<td><hr /></td>
+<td><hr /></td>
 </tr>
 <tr>
-<td><code>--svelte-stork-highlight-background-color</code></td>
+<td><code>--svst-excerpt-line-height</code></td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>--svst-excerpt-spacing</code></td>
+<td><code>0.8em</code></td>
+</tr>
+<tr>
+<td><hr /></td>
+<td><hr /></td>
+</tr>
+<tr>
+<td><code>--svst-highlight-background-color</code></td>
 <td><code>hsl(59, 98%, 58%)</code></td>
 </tr>
 <tr>
-<td><code>--svelte-stork-message-padding</code></td>
-<td><code>0.75rem 1rem</code></td>
+<td><hr /></td>
+<td><hr /></td>
 </tr>
 <tr>
-<td><code>--svelte-stork-message-font-size</code></td>
-<td><code>2rem</code></td>
+<td><code>--svst-message-color</code></td>
+<td><code>hsla(0, 0%, 0%, 0.8)</code></td>
 </tr>
 <tr>
-<td><code>--svelte-stork-message-opacity</code></td>
-<td><code>0.85</code></td>
+<td><code>--svst-message-padding</code></td>
+<td><code>0.5em 1em</code></td>
 </tr>
 <tr>
-<td><code>--svelte-stork-output-max-height</code></td>
+<td><code>--svst-message-font-size</code></td>
+<td><code>1em</code></td>
+</tr>
+<tr>
+<td><hr /></td>
+<td><hr /></td>
+</tr>
+<tr>
+<td><code>--svst-output-color</code></td>
+<td><code>black</code></td>
+</tr>
+<tr>
+<td><code>--svst-output-font-family</code></td>
+<td><code>-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;</code></td>
+</tr>
+<tr>
+<td><code>--svst-output-font-size</code></td>
+<td><code>1em</code></td>
+</tr>
+<tr>
+<td><code>--svst-output-font-weight</code></td>
+<td><code>400</code></td>
+</tr>
+<tr>
+<td><code>--svst-output-max-height</code></td>
 <td><code>auto</code></td>
 </tr>
 <tr>
-<td><code>--svelte-stork-results-border</code></td>
-<td><code>1px solid currentColor</code></td>
+<td><hr /></td>
+<td><hr /></td>
 </tr>
 <tr>
-<td><code>--svelte-stork-results-spacing</code></td>
-<td><code>0.5rem</code></td>
+<td><code>--svst-result-border</code></td>
+<td><code>1px solid hsla(0, 0%, 90%, 1)</code></td>
+</tr>
+<tr>
+<td><code>--svst-result-font-size</code></td>
+<td><code>0.8em</code></td>
+</tr>
+<tr>
+<td><hr /></td>
+<td><hr /></td>
+</tr>
+<tr>
+<td><code>--svst-results-border</code></td>
+<td><code>1px solid hsla(0, 0%, 80%, 1)</code></td>
 </tr>
 </tbody>
 </table>
@@ -242,6 +346,7 @@ store<span class="token punctuation">.</span><span class="token function">subscr
 <li>
 <p>Functions</p>
 <ul>
+<li><code>initalize</code></li>
 <li><code>register</code></li>
 </ul>
 </li>
