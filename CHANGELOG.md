@@ -1,5 +1,7 @@
 # CHANGELOG
 
+## v0.0.3 - 2021/07/02
+
 -   Added `<StorkOutput excerpts_maximum={number}>` — Configures the maximum amount of excerpts displayed per-entry.
 -   Added `<StorkOutput results_maximum={number}>` — Configures the maximum amount of results displayed per-query.
 -   Added `initialize(options: IInitializeOptions): Promise<void>` — Initializes Stork Search library with WASM blob, optionally allowing for downloading and mounting the Stork Search library if not previously loaded.
