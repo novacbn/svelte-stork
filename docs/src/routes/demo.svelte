@@ -66,7 +66,7 @@
         <small>* Well, just the first twenty.</small>
 
         <div class="card is-paddingless">
-            <Stork.Output excerpts_maximum={3} query={_query} />
+            <Stork.Output query={_query} />
         </div>
     {:catch err}
         <div class="card bd-error text-error">
@@ -84,7 +84,7 @@
 
 <style>
     :global(:root) {
-        --svst-font-size: 1.3em;
+        --svst-output-font-size: 1.3em;
         --svst-output-max-height: min(65ex, 60vh);
     }
 
