@@ -4,28 +4,22 @@
 
     let PROMISE_INITIALIZE = null;
 
-    let PROMISE_REGISTER = null;
-
     function initialize_stork() {
         if (!PROMISE_INITIALIZE) {
-            PROMISE_INITIALIZE = initialize({
-                script_url: `${base}/assets/stork/stork-v1.2.1.js`,
-                wasm_url: `${base}/assets/stork/stork-v1.2.1.wasm`,
-            });
+            PROMISE_INITIALIZE = (async () => {
+                await initialize({
+                    script_url: `${base}/assets/stork/stork-v1.2.1.js`,
+                    wasm_url: `${base}/assets/stork/stork-v1.2.1.wasm`,
+                });
+
+                await register({
+                    index_name: "federalist-stork-1.2.1",
+                    index_url: `${base}/assets/stork/federalist-stork-v1.2.1.st`,
+                });
+            })();
         }
 
         return PROMISE_INITIALIZE;
-    }
-
-    function register_stork() {
-        if (!PROMISE_REGISTER) {
-            PROMISE_REGISTER = register({
-                index_name: "federalist-stork-1.2.1",
-                index_url: `${base}/assets/stork/federalist-stork-v1.2.1.st`,
-            });
-        }
-
-        return PROMISE_REGISTER;
     }
 </script>
 
@@ -39,7 +33,6 @@
 
     async function await_initialize() {
         await initialize_stork();
-        await register_stork();
 
         _store = search({
             index_name: "federalist-stork-1.2.1",
