@@ -2,7 +2,7 @@
 
 ## Description
 
-Minimalist Svelte wrapper Stores around [Stork](https://github.com/jameslittle230/stork) search, also provides customizable Components.
+Minimalist Svelte wrapper Stores around [Stork Search](https://github.com/jameslittle230/stork), also provides customizable Components.
 
 ## Demo
 
@@ -12,29 +12,40 @@ See a demo of the Svelte Components at [novacbn.github.io/svelte-stork](https://
 
 > **NOTE**: To learn how to build your own custom search indices and other concepts, visit the [Stork documentation](https://stork-search.net/docs).
 
-To get started with this library, you need to [install Stork](https://stork-search.net/docs/install) on your Web Application. And make sure the `stork` global namespace available.
+To get started with this library, you need to [install Stork Search](https://stork-search.net/docs/install) on your Web Application. Alternatively, see the below sample on how to have this library handle that for you.
 
 ## Usage
 
 ### Stores
 
 ```javascript
-import {register, search} from "svelte-stork";
+import {initialize, register, search} from "svelte-stork";
 
-// Before we can do anything with search, you need to register
-// your search index and Stork's WASM build. Which will be fetched
-// from the network
+// Before we can do anything with `search`, you need to
+// initialize Stork Search
+await initialize({
+    // If you want this library to handle mounting / loading
+    // of the main Stork JS library after page load, you can
+    // uncomment the following line
+    //
+    // script_url: "/path/to/stork.js",
+
+    // The WASM blob is not optional however, due to how
+    // Browsers handle loading them
+    wasm_url: "/path/to/stork.wasm",
+});
+
+// Next, you need to register your search index with Stork Search
 await register({
     // All search indices are globally registered to the webpage, so
     // you need to choose a unique name. Preferably versioned as well
     index_name: "my-search-index_v1.0.0",
 
-    // Search index and WASM blob be self-hosted or using Stork's CDN
+    // Make sure this path publically accessible
     index_url: "/path/to/search_index.v1.0.0.st",
-    wasm_url: "/path/to/stork.wasm",
 });
 
-// Now if we registered successfully, we can create our Svelte Store
+// Now if we initialized and registered successfully, we can create the Svelte Store
 const store = search({
     // You can customize how long in milliseconds the Store after
     // receiving input to update the query results
@@ -65,14 +76,15 @@ store.subscribe((query) => {
 
 ### Components
 
+> **NOTE**: This sample expects initialization / registration of Stork Search was already performed.
+
 <!-- prettier-ignore -->
 ```html
 <script>
-    import {register, search} from "svelte-stork";
+    import {search} from "svelte-stork";
     import * as Stork from "svelte-stork/components";
 
-    // Initialized the exact same way as the above example
-    const registration_promise = register(...);
+    // Just input the same options you passed into the Javascript sample
     const store = search(...);
 
     let value = "";
@@ -83,21 +95,22 @@ store.subscribe((query) => {
     $: query = $store;
 </script>
 
-<!--
-    Before we can render the search UI and results, we need to
-    wait for the WASM blob to load and the search index to be
-    registered
--->
-{#await registration_promise}
-    Loading search index...
-{:then}
-    <input type="text" placeholder="...search" bind:value />
 
-    <!-- Now we can just pass in the query output into the premade basic search UI -->
-    {#if query}
-        <Stork.Output {query} />
-    {/if}
-{/await}
+<input type="text" placeholder="...search" bind:value />
+
+<!--
+    Now we can just pass in the query output into the built-in basic search UI
+
+    Properties:
+        - `excerpts_maximum` / `results_maximum` — When set greater than `-1`, they limit the respective amount of
+        excerpts and results items displayed in search outputs
+-->
+
+<Stork.Output
+    excerpts_maximum={-1}
+    results_maximum={-1} 
+    {query}
+/>
 ```
 
 ## Developer
@@ -122,28 +135,52 @@ npm install github:novacbn/svelte-stork
 
 ### CSS Custom Properties
 
-| Name                                  | Default                  |
-| ------------------------------------- | ------------------------ |
-| `--svst-attribution-padding`          | `0.75rem 1rem`           |
-| `--svst-entry-padding`                | `0.5rem 0.5rem`          |
-| `--svst-entry-hover-background-color` | `hsl(192, 82%, 78%)`     |
-| `--svst-entry-spacing`                | `0.125em`                |
-| `--svst-entry-title-spacing`          | `0.125em`                |
-| `--svst-entry-title-font-size`        | `1.75rem`                |
-| `--svst-entry-title-font-weight`      | `bold`                   |
-| `--svst-excerpt-padding`              | `0 0.75em`               |
-| `--svst-highlight-background-color`   | `hsl(59, 98%, 58%)`      |
-| `--svst-message-padding`              | `0.75rem 1rem`           |
-| `--svst-message-font-size`            | `2rem`                   |
-| `--svst-message-opacity`              | `0.85`                   |
-| `--svst-output-max-height`            | `auto`                   |
-| `--svst-results-border`               | `1px solid currentColor` |
-| `--svst-results-spacing`              | `0.5rem`                 |
+| Name                                  | Default                                                                                                                      |
+| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `--svst-attribution-color`            | `hsla(0, 0%, 0%, 0.8)`                                                                                                       |
+| `--svst-attribution-font-size`        | `0.8em`                                                                                                                      |
+| `--svst-attribution-padding`          | `0.5rem 1em`                                                                                                                 |
+| `--svst-attribution-text-decoration`  | `underline`                                                                                                                  |
+| `--svst-attribution-hover-opacity`    | `1`                                                                                                                          |
+| `--svst-attribution-link-color`       | `hsl(192, 82%, 44%)`                                                                                                         |
+| `--svst-attribution-visited-color`    | `hsl(271, 63%, 34%)`                                                                                                         |
+| <hr />                                | <hr />                                                                                                                       |
+| `--svst-entry-color`                  | `currentColor`                                                                                                               |
+| `--svst-entry-cursor`                 | `pointer`                                                                                                                    |
+| `--svst-entry-padding`                | `1em`                                                                                                                        |
+| `--svst-entry-text-decoration`        | `none`                                                                                                                       |
+| `--svst-entry-hover-background-color` | `hsl(192, 82%, 78%)`                                                                                                         |
+| `--svst-entry-hover-opacity`          | `1`                                                                                                                          |
+| <hr />                                | <hr />                                                                                                                       |
+| `--svst-entry-title-spacing`          | `0.8em`                                                                                                                      |
+| `--svst-entry-title-font-size`        | `1.1em`                                                                                                                      |
+| `--svst-entry-title-font-weight`      | `bold`                                                                                                                       |
+| <hr />                                | <hr />                                                                                                                       |
+| `--svst-excerpt-line-height`          | `1`                                                                                                                          |
+| `--svst-excerpt-spacing`              | `0.8em`                                                                                                                      |
+| <hr />                                | <hr />                                                                                                                       |
+| `--svst-highlight-background-color`   | `hsl(59, 98%, 58%)`                                                                                                          |
+| <hr />                                | <hr />                                                                                                                       |
+| `--svst-message-color`                | `hsla(0, 0%, 0%, 0.8)`                                                                                                       |
+| `--svst-message-padding`              | `0.5em 1em`                                                                                                                  |
+| `--svst-message-font-size`            | `1em`                                                                                                                        |
+| <hr />                                | <hr />                                                                                                                       |
+| `--svst-output-color`                 | `black`                                                                                                                      |
+| `--svst-output-font-family`           | `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"` |
+| `--svst-output-font-size`             | `1em`                                                                                                                        |
+| `--svst-output-font-weight`           | `400`                                                                                                                        |
+| `--svst-output-max-height`            | `auto`                                                                                                                       |
+| <hr />                                | <hr />                                                                                                                       |
+| `--svst-result-border`                | `1px solid hsla(0, 0%, 90%, 1)`                                                                                              |
+| `--svst-result-font-size`             | `0.8em`                                                                                                                      |
+| <hr />                                | <hr />                                                                                                                       |
+| `--svst-results-border`               | `1px solid hsla(0, 0%, 80%, 1)`                                                                                              |
 
 ### API
 
 -   Functions
 
+    -   `initalize`
     -   `register`
 
 -   Stores
