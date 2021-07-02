@@ -120,7 +120,7 @@ store.subscribe((query) => {
 Open your terminal and install via `npm`:
 
 ```bash
-npm install github:novacbn/svelte-stork#0.0.3
+npm install github:novacbn/svelte-stork#0.0.4
 ```
 
 Install current in-development code:
@@ -137,9 +137,10 @@ npm install github:novacbn/svelte-stork
 
 | Name                                  | Default                                                                                                                      |
 | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `--svst-attribution-color`            | `hsla(0, 0%, 0%, 0.8)`                                                                                                       |
+| `--svst-attribution-color`            | `currentColor`                                                                                                               |
 | `--svst-attribution-font-size`        | `0.8em`                                                                                                                      |
 | `--svst-attribution-padding`          | `0.5rem 1em`                                                                                                                 |
+| `--svst-attribution-opacity`          | `0.8`                                                                                                                        |
 | `--svst-attribution-text-decoration`  | `underline`                                                                                                                  |
 | `--svst-attribution-hover-opacity`    | `1`                                                                                                                          |
 | `--svst-attribution-link-color`       | `hsl(192, 82%, 44%)`                                                                                                         |
@@ -161,9 +162,10 @@ npm install github:novacbn/svelte-stork
 | <hr />                                | <hr />                                                                                                                       |
 | `--svst-highlight-background-color`   | `hsl(59, 98%, 58%)`                                                                                                          |
 | <hr />                                | <hr />                                                                                                                       |
-| `--svst-message-color`                | `hsla(0, 0%, 0%, 0.8)`                                                                                                       |
+| `--svst-message-color`                | `currentColor`                                                                                                               |
 | `--svst-message-padding`              | `0.5em 1em`                                                                                                                  |
 | `--svst-message-font-size`            | `1em`                                                                                                                        |
+| `--svst-message-opacity`              | `0.8`                                                                                                                        |
 | <hr />                                | <hr />                                                                                                                       |
 | `--svst-output-color`                 | `black`                                                                                                                      |
 | `--svst-output-font-family`           | `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"` |
