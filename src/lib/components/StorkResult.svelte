@@ -25,8 +25,14 @@
 
 <style>
     :global(.svst-result) {
-        all: unset;
-
         display: list-item;
+
+        padding: 0;
+
+        font-size: var(--svst-result-font-size, 0.8em);
+    }
+
+    :global(.svst-result:not(:last-child)) {
+        border-bottom: var(--svst-result-border, 1px solid hsla(0, 0%, 90%, 1));
     }
 </style>

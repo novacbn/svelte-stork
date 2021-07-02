@@ -19,8 +19,8 @@
 
 <style>
     :global(.svst-excerpt) {
-        all: unset;
+        margin: 0 0 var(--svst-excerpt-spacing, 0.8em) 0;
 
-        padding: var(--svst-excerpt-padding, 0 0.75em);
+        line-height: var(--svst-excerpt-line-height, 1);
     }
 </style>

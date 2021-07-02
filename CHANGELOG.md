@@ -10,6 +10,7 @@
 -   Moved `IRegisterOptions.wasm_url` -> `IInitializeOptions.wasm_url`.
 -   Renamed all `svelte-stork-` prefixes -> `svst-`.
 -   Updated `<StorkOutput query={XXX} />` to accept `undefined` values.
+-   Updated base styles to more closely align with Stork Search's basic theme.
 
 ## v0.0.2 - 2021/06/30
 

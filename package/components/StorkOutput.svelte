@@ -46,5 +46,23 @@
         flex-direction: column;
 
         max-height: var(--svst-output-max-height, auto);
+
+        color: var(--svst-output-color, black);
+
+        font-size: var(--svst-font-size, 1em);
+        font-weight: var(--svst-font-weight, 400);
+        font-family: var(
+            --svst-output-font-family,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            Roboto,
+            Helvetica,
+            Arial,
+            sans-serif,
+            "Apple Color Emoji",
+            "Segoe UI Emoji",
+            "Segoe UI Symbol"
+        );
     }
 </style>

@@ -45,23 +45,24 @@
 
 <style>
     :global(.svst-entry) {
-        all: unset;
-
         display: flex;
         flex-direction: column;
 
-        padding: var(--svst-entry-padding, 0.5rem 0.5rem);
+        padding: var(--svst-entry-padding, 1em);
 
-        color: currentColor;
+        text-decoration: var(--svst-entry-text-decoration, none);
 
-        cursor: pointer;
+        cursor: var(--svst-entry-cursor, pointer);
+    }
+
+    :global(.svst-entry),
+    :global(.svst-entry:link),
+    :global(.svst-entry:visited) {
+        color: var(--svst-entry-color, currentColor);
     }
 
     :global(.svst-entry:hover) {
         background-color: var(--svst-entry-hover-background-color, hsl(192, 82%, 78%));
-    }
-
-    :global(.svst-entry > * + *) {
-        margin-top: var(--svst-entry-spacing, 0.125em);
+        opacity: var(--svst-entry-hover-opacity, 1);
     }
 </style>

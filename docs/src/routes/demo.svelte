@@ -91,11 +91,12 @@
 
 <style>
     :global(:root) {
-        --svst-output-max-height: min(65ex, 70vh);
+        --svst-font-size: 1.3em;
+        --svst-output-max-height: min(65ex, 60vh);
     }
 
     :global(.svst-entry:hover) {
-        /** HACK: Need to prevent Chota from messing with the Component style */
+        /** HACK: Needed to prevent Chota from messing with `svelte-stork`'s base styles '*/
         opacity: 1 !important;
     }
 </style>

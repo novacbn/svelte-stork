@@ -21,18 +21,15 @@
 
 <style>
     :global(.svst-results) {
-        all: unset;
-
         flex-grow: 1;
 
-        border-top: var(--svst-results-border, 1px solid currentColor);
-        border-bottom: var(--svst-results-border, 1px solid currentColor);
+        margin: 0;
+        padding: 0;
+
+        border-top: var(--svst-results-border, 1px solid hsla(0, 0%, 80%, 1));
+        border-bottom: var(--svst-results-border, 1px solid hsla(0, 0%, 80%, 1));
 
         list-style: none;
         overflow-y: auto;
-    }
-
-    :global(.svst-results > * + *) {
-        margin-top: var(--svst-results-spacing, 0.5rem);
     }
 </style>

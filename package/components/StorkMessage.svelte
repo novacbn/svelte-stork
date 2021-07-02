@@ -21,9 +21,9 @@
 
 <style>
     :global(.svst-message) {
-        padding: var(--svst-message-padding, 0.75rem 1rem);
+        padding: var(--svst-message-padding, 0.5em 1em);
 
-        font-size: var(--svst-message-font-size, 2rem);
-        opacity: var(--svst-message-opacity, 0.85);
+        color: var(--svst-message-color, hsla(0, 0%, 0%, 0.8));
+        font-size: var(--svst-message-font-size, 1em);
     }
 </style>

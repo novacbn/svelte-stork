@@ -19,11 +19,9 @@
 
 <style>
     :global(.svst-entry-title) {
-        all: unset;
+        margin: 0 0 var(--svst-entry-title-spacing, 0.8em) 0;
 
-        margin-bottom: var(--svst-entry-title-spacing, 0.125em);
-
-        font-size: var(--svst-entry-title-font-size, 1.75rem);
+        font-size: var(--svst-entry-title-font-size, 1.1em);
         font-weight: var(--svst-entry-title-font-weight, bold);
     }
 </style>
