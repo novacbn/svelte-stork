@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v0.0.4 - 2021/07/02
+
+-   Added `--svst-attribution-opacity` / `--svst-message-opacity` — Both default to `0.8`.
+-   Changed `--svst-attribution-color` / `--svst-message-color` - Both default to `currentColor`.
+-   Changed `X files found.` -> `X results found.`.
+-   Fixed `--svst-font-size` -> `--svst-output-font-size`, `--svst-font-weight` -> `--svst-output-font-weight`.
+-   Generated typedefs for core library.
+-   Renamed `IStorkStore` -> `ISearchStore`.
+
 ## v0.0.3 - 2021/07/02
 
 -   Added `<StorkOutput excerpts_maximum={number}>` — Configures the maximum amount of excerpts displayed per-entry.
