@@ -13,14 +13,14 @@
     export let excerpt: IStorkExcerpt;
 </script>
 
-<p bind:this={element} class="svelte-stork-excerpt {_class}" {style}>
+<p bind:this={element} class="svst-excerpt {_class}" {style}>
     ...<Highlight ranges={excerpt.highlight_ranges} text={excerpt.text} />...
 </p>
 
 <style>
-    :global(.svelte-stork-excerpt) {
+    :global(.svst-excerpt) {
         all: unset;
 
-        padding: var(--svelte-stork-excerpt-padding, 0 0.75em);
+        padding: var(--svst-excerpt-padding, 0 0.75em);
     }
 </style>

@@ -17,14 +17,20 @@
     export {_class as class};
 
     export let excerpts: IStorkExcerpt[];
+    export let excerpts_maximum: number = -1;
     export let entry: IStorkEntry;
     export let query: IStorkQuery;
     export let title_highlight_ranges: IStorkHighlightRange[];
+
+    $: _excerpts =
+        excerpts_maximum > -1
+            ? excerpts.filter((excerpt, index) => index < excerpts_maximum)
+            : excerpts;
 </script>
 
 <a
     bind:this={element}
-    class="svelte-stork-entry {_class}"
+    class="svst-entry {_class}"
     href="{query.url_prefix}{entry.url}"
     target="_blank"
     rel="noopener noreferrer"
@@ -32,30 +38,30 @@
 >
     <EntryTitle {entry} {title_highlight_ranges} />
 
-    {#each excerpts as excerpt (excerpt.text)}
+    {#each _excerpts as excerpt (excerpt.text)}
         <Excerpt {excerpt} />
     {/each}
 </a>
 
 <style>
-    :global(.svelte-stork-entry) {
+    :global(.svst-entry) {
         all: unset;
 
         display: flex;
         flex-direction: column;
 
-        padding: var(--svelte-stork-entry-padding, 0.5rem 0.5rem);
+        padding: var(--svst-entry-padding, 0.5rem 0.5rem);
 
         color: currentColor;
 
         cursor: pointer;
     }
 
-    :global(.svelte-stork-entry:hover) {
-        background-color: var(--svelte-stork-entry-hover-background-color, hsl(192, 82%, 78%));
+    :global(.svst-entry:hover) {
+        background-color: var(--svst-entry-hover-background-color, hsl(192, 82%, 78%));
     }
 
-    :global(.svelte-stork-entry > * + *) {
-        margin-top: var(--svelte-stork-entry-spacing, 0.125em);
+    :global(.svst-entry > * + *) {
+        margin-top: var(--svst-entry-spacing, 0.125em);
     }
 </style>

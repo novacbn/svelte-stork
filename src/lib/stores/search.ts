@@ -1,6 +1,26 @@
 import {get, readable, writable} from "svelte/store";
 
 import {debounce} from "../util/functional";
+import {mount_script} from "../util/html";
+
+/**
+ * Represents the options passed into [[initialize]]
+ */
+export interface IInitializeOptions {
+    /**
+     * Represents the URL used to mount and initialize the main
+     * Stork Search global Javascript library
+     *
+     * **NOTE**: This is optional if you manually load the library via `<script>`
+     */
+    script_url?: string;
+
+    /**
+     * Represents the URL used to download and initialize the
+     * WASM build of Stork
+     */
+    wasm_url: string;
+}
 
 /**
  * Represents the options passed into [[register]]
@@ -24,12 +44,6 @@ export interface IRegisterOptions {
      * any existing indices under the same name. Instead of erroring out
      */
     overwrite: boolean;
-
-    /**
-     * Represents the URL used to download and initialize the
-     * WASM build of Stork
-     */
-    wasm_url: string;
 }
 
 /**
@@ -147,12 +161,31 @@ export interface IStorkStore {
     update(callback: (query: IStorkQuery | null) => string): void;
 }
 
-export async function register(options: IRegisterOptions): Promise<void> {
-    const {index_name, index_url, overwrite = false, wasm_url} = options;
-    const stork = (window as any).stork;
+export async function initialize(options: IInitializeOptions): Promise<void> {
+    const {script_url, wasm_url} = options;
+    let stork = (window as any).stork;
+
+    if (script_url) {
+        if (stork) {
+            console.warn(
+                "[svelte-stork] Stork Search library was previously mounted and initialized, skipping..."
+            );
+        } else {
+            try {
+                await mount_script("stork-search", script_url);
+                stork = (window as any).stork;
+            } catch (err) {
+                // TODO: Standardize error object
+                throw new ReferenceError(
+                    `bad dispatch to 'initialize' (failed to mount and initialize Stork Search library)`
+                );
+            }
+        }
+    }
+
     if (!stork) {
         // TODO: Standardize error object
-        throw new ReferenceError(`bad dispatch to 'register' (Stork namespace not found)`);
+        throw new ReferenceError(`bad dispatch to 'initialize' (Stork namespace not found)`);
     }
 
     try {
@@ -161,8 +194,18 @@ export async function register(options: IRegisterOptions): Promise<void> {
         // TODO: Look into what exceptions this spits out
         // and provide standardized error object
         throw new Error(
-            "bad option 'IRegisterOptions.wasm_url' to 'register' (failed to download and initialize WASM blob)"
+            "bad option 'IInitializeOptions.wasm_url' to 'initialize' (failed to download and initialize Stork WASM blob)"
         );
+    }
+}
+
+export async function register(options: IRegisterOptions): Promise<void> {
+    const {index_name, index_url, overwrite = false} = options;
+    const stork = (window as any).stork;
+
+    if (!stork) {
+        // TODO: Standardize error object
+        throw new ReferenceError(`bad dispatch to 'register' (Stork namespace not found)`);
     }
 
     try {

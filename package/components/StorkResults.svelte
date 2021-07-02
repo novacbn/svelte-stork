@@ -8,30 +8,31 @@
     let _class: string = "";
     export let style: string | undefined = undefined;
 
+    export let excerpts_maximum: number = -1;
     export let results: IStorkResult[];
     export let query: IStorkQuery;
 </script>
 
-<ul bind:this={element} class="svelte-stork-results {_class}" {style}>
+<ul bind:this={element} class="svst-results {_class}" {style}>
     {#each results as result (result.entry.url)}
-        <Result {query} {result} />
+        <Result {excerpts_maximum} {query} {result} />
     {/each}
 </ul>
 
 <style>
-    :global(.svelte-stork-results) {
+    :global(.svst-results) {
         all: unset;
 
         flex-grow: 1;
 
-        border-top: var(--svelte-stork-results-border, 1px solid currentColor);
-        border-bottom: var(--svelte-stork-results-border, 1px solid currentColor);
+        border-top: var(--svst-results-border, 1px solid currentColor);
+        border-bottom: var(--svst-results-border, 1px solid currentColor);
 
         list-style: none;
         overflow-y: auto;
     }
 
-    :global(.svelte-stork-results > * + *) {
-        margin-top: var(--svelte-stork-results-spacing, 0.5rem);
+    :global(.svst-results > * + *) {
+        margin-top: var(--svst-results-spacing, 0.5rem);
     }
 </style>

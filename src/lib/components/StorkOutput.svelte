@@ -12,29 +12,39 @@
 
     export {_class as class};
 
-    export let query: IStorkQuery;
+    export let excerpts_maximum: number = -1;
+    export let query: IStorkQuery | undefined = undefined;
     export let results: IStorkResult[] | undefined = undefined;
+    export let results_maximum: number = -1;
 
     // NOTE: Sometimes the end-developer might want to do custom ordering
     // here. So we allow them to override what's passed in
-    $: _results = results ? results : query.results;
+    let _results: IStorkResult[];
+    $: _results = results ? results : query ? query.results : [];
+
+    $: _results =
+        results_maximum > -1
+            ? _results.filter((result, index) => index < results_maximum)
+            : _results;
 </script>
 
-<div bind:this={element} class="svelte-stork-output {_class}" {style}>
-    <Message {query} />
+<div bind:this={element} class="svst-output {_class}" {style}>
+    {#if query}
+        <Message results={_results} />
+    {/if}
 
-    {#if _results.length > 0}
-        <Results results={_results} {query} />
+    {#if query && _results.length > 0}
+        <Results results={_results} {excerpts_maximum} {query} />
     {/if}
 
     <Attribution />
 </div>
 
 <style>
-    :global(.svelte-stork-output) {
+    :global(.svst-output) {
         display: flex;
         flex-direction: column;
 
-        max-height: var(--svelte-stork-output-max-height, auto);
+        max-height: var(--svst-output-max-height, auto);
     }
 </style>

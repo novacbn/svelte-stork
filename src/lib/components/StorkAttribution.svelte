@@ -7,14 +7,14 @@
     export {_class as class};
 </script>
 
-<div bind:this={element} class="svelte-stork-attribution {_class}" {style}>
+<div bind:this={element} class="svst-attribution {_class}" {style}>
     Powered by <a href="https://stork-search.net" target="_blank" rel="noopener noreferrer">
         Stork
     </a>
 </div>
 
 <style>
-    :global(.svelte-stork-attribution) {
-        padding: var(--svelte-stork-attribution-padding, 0.75rem 1rem);
+    :global(.svst-attribution) {
+        padding: var(--svst-attribution-padding, 0.75rem 1rem);
     }
 </style>

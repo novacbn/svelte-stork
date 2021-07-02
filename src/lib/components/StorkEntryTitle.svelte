@@ -13,17 +13,17 @@
     export let title_highlight_ranges: IStorkHighlightRange[];
 </script>
 
-<p bind:this={element} class="svelte-stork-entry-title {_class}" {style}>
+<p bind:this={element} class="svst-entry-title {_class}" {style}>
     <Highlight ranges={title_highlight_ranges} text={entry.title} />
 </p>
 
 <style>
-    :global(.svelte-stork-entry-title) {
+    :global(.svst-entry-title) {
         all: unset;
 
-        margin-bottom: var(--svelte-stork-entry-title-spacing, 0.125em);
+        margin-bottom: var(--svst-entry-title-spacing, 0.125em);
 
-        font-size: var(--svelte-stork-entry-title-font-size, 1.75rem);
-        font-weight: var(--svelte-stork-entry-title-font-weight, bold);
+        font-size: var(--svst-entry-title-font-size, 1.75rem);
+        font-weight: var(--svst-entry-title-font-weight, bold);
     }
 </style>

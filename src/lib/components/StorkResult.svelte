@@ -8,21 +8,23 @@
     let _class: string = "";
     export let style: string | undefined = undefined;
 
+    export let excerpts_maximum: number = -1;
     export let result: IStorkResult;
     export let query: IStorkQuery;
 </script>
 
-<li bind:this={element} class="svelte-stork-result {_class}" {style}>
+<li bind:this={element} class="svst-result {_class}" {style}>
     <Entry
         entry={result.entry}
         excerpts={result.excerpts}
         title_highlight_ranges={result.title_highlight_ranges}
+        {excerpts_maximum}
         {query}
     />
 </li>
 
 <style>
-    :global(.svelte-stork-result) {
+    :global(.svst-result) {
         all: unset;
 
         display: list-item;

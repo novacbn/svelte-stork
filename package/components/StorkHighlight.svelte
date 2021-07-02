@@ -36,16 +36,16 @@
 {#each _parts as [sub_text, is_highlighted]}
     {#if is_highlighted}
         <!-- prettier-ignore -->
-        <mark class="svelte-stork-highlight {_class}" {style}>{sub_text}</mark>
+        <mark class="svst-highlight {_class}" {style}>{sub_text}</mark>
     {:else}
         {sub_text}
     {/if}
 {/each}
 
 <style>
-    :global(.svelte-stork-highlight) {
+    :global(.svst-highlight) {
         all: unset;
 
-        background-color: var(--svelte-stork-highlight-background-color, hsl(59, 98%, 58%));
+        background-color: var(--svst-highlight-background-color, hsl(59, 98%, 58%));
     }
 </style>

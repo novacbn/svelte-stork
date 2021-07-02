@@ -107,7 +107,7 @@ store.subscribe((query) => {
 Open your terminal and install via `npm`:
 
 ```bash
-npm install github:novacbn/svelte-stork#0.0.2
+npm install github:novacbn/svelte-stork#0.0.3
 ```
 
 Install current in-development code:
@@ -122,23 +122,23 @@ npm install github:novacbn/svelte-stork
 
 ### CSS Custom Properties
 
-| Name                                          | Default                  |
-| --------------------------------------------- | ------------------------ |
-| `--svelte-stork-attribution-padding`          | `0.75rem 1rem`           |
-| `--svelte-stork-entry-padding`                | `0.5rem 0.5rem`          |
-| `--svelte-stork-entry-hover-background-color` | `hsl(192, 82%, 78%)`     |
-| `--svelte-stork-entry-spacing`                | `0.125em`                |
-| `--svelte-stork-entry-title-spacing`          | `0.125em`                |
-| `--svelte-stork-entry-title-font-size`        | `1.75rem`                |
-| `--svelte-stork-entry-title-font-weight`      | `bold`                   |
-| `--svelte-stork-excerpt-padding`              | `0 0.75em`               |
-| `--svelte-stork-highlight-background-color`   | `hsl(59, 98%, 58%)`      |
-| `--svelte-stork-message-padding`              | `0.75rem 1rem`           |
-| `--svelte-stork-message-font-size`            | `2rem`                   |
-| `--svelte-stork-message-opacity`              | `0.85`                   |
-| `--svelte-stork-output-max-height`            | `auto`                   |
-| `--svelte-stork-results-border`               | `1px solid currentColor` |
-| `--svelte-stork-results-spacing`              | `0.5rem`                 |
+| Name                                  | Default                  |
+| ------------------------------------- | ------------------------ |
+| `--svst-attribution-padding`          | `0.75rem 1rem`           |
+| `--svst-entry-padding`                | `0.5rem 0.5rem`          |
+| `--svst-entry-hover-background-color` | `hsl(192, 82%, 78%)`     |
+| `--svst-entry-spacing`                | `0.125em`                |
+| `--svst-entry-title-spacing`          | `0.125em`                |
+| `--svst-entry-title-font-size`        | `1.75rem`                |
+| `--svst-entry-title-font-weight`      | `bold`                   |
+| `--svst-excerpt-padding`              | `0 0.75em`               |
+| `--svst-highlight-background-color`   | `hsl(59, 98%, 58%)`      |
+| `--svst-message-padding`              | `0.75rem 1rem`           |
+| `--svst-message-font-size`            | `2rem`                   |
+| `--svst-message-opacity`              | `0.85`                   |
+| `--svst-output-max-height`            | `auto`                   |
+| `--svst-results-border`               | `1px solid currentColor` |
+| `--svst-results-spacing`              | `0.5rem`                 |
 
 ### API
 
