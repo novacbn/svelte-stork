@@ -30,21 +30,25 @@
         "components.d.ts"
     ],
     "scripts": {
-        "build": "npm run test:types && npm run build:lib && npm run build:types",
+        "build": "npm run test && npm run build:lib && npm run build:types",
         "build:lib": "svelte-kit package",
         "build:types": "tsc --emitDeclarationOnly",
         "build:typedoc": "typedoc --out ./package/docs/api --exclude '**/index.ts' --stripInternal --target es6 --theme minimal --mode modules src",
+        "test": "npm run test:types && npm run test:svelte",
+        "test:svelte": "svelte-check --tsconfig ./tsconfig.json",
         "test:types": "tsc --noEmit"
     },
     "dependencies": {
-        "svelte": "^3.38.2"
+        "svelte": "^3.38.3"
     },
     "devDependencies": {
-        "@sveltejs/kit": "^1.0.0-next.119",
+        "@sveltejs/kit": "^1.0.0-next.120",
         "@tsconfig/svelte": "^2.0.1",
         "prettier": "^2.3.2",
+        "svelte-check": "^2.2.0",
         "svelte-preprocess": "^4.7.3",
+        "svelte2tsx": "^0.4.1",
         "tslib": "^2.3.0",
-        "typescript": "^4.3.4"
+        "typescript": "^4.3.5"
     }
 }
