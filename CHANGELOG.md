@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.0.5 -
+
+-   Upgraded to `@sveltejs/kit`, `1.0.0-next.120` -> `1.0.0-next.121`.
+-   Changed `No files found.` -> `No results found.`.
+-   Generated typedefs for Components.
+
 ## v0.0.4 - 2021/07/02
 
 -   Added `--svst-attribution-opacity` / `--svst-message-opacity` — Both default to `0.8`.

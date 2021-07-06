@@ -1,31 +1,19 @@
-<script lang="ts">
-    import type {
-        IStorkEntry,
-        IStorkExcerpt,
-        IStorkHighlightRange,
-        IStorkQuery,
-    } from "../stores/search";
-
-    import EntryTitle from "./StorkEntryTitle.svelte";
-    import Excerpt from "./StorkExcerpt.svelte";
-
-    export let element: HTMLAnchorElement | null = null;
-
-    let _class: string = "";
-    export let style: string | undefined = undefined;
-
-    export {_class as class};
-
-    export let excerpts: IStorkExcerpt[];
-    export let excerpts_maximum: number = -1;
-    export let entry: IStorkEntry;
-    export let query: IStorkQuery;
-    export let title_highlight_ranges: IStorkHighlightRange[];
-
-    $: _excerpts =
-        excerpts_maximum > -1
-            ? excerpts.filter((excerpt, index) => index < excerpts_maximum)
-            : excerpts;
+<script lang="typescript">;
+import EntryTitle from "./StorkEntryTitle.svelte";
+import Excerpt from "./StorkExcerpt.svelte";
+export let element = null;
+let _class = "";
+export let style = undefined;
+export { _class as class };
+export let excerpts;
+export let excerpts_maximum = -1;
+export let entry;
+export let query;
+export let title_highlight_ranges;
+$: _excerpts =
+    excerpts_maximum > -1
+        ? excerpts.filter((excerpt, index) => index < excerpts_maximum)
+        : excerpts;
 </script>
 
 <a

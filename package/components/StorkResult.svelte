@@ -1,16 +1,11 @@
-<script lang="ts">
-    import type {IStorkQuery, IStorkResult} from "../stores/search";
-
-    import Entry from "./StorkEntry.svelte";
-
-    export let element: HTMLLIElement | null = null;
-
-    let _class: string = "";
-    export let style: string | undefined = undefined;
-
-    export let excerpts_maximum: number = -1;
-    export let result: IStorkResult;
-    export let query: IStorkQuery;
+<script lang="ts">;
+import Entry from "./StorkEntry.svelte";
+export let element = null;
+let _class = "";
+export let style = undefined;
+export let excerpts_maximum = -1;
+export let result;
+export let query;
 </script>
 
 <li bind:this={element} class="svst-result {_class}" {style}>

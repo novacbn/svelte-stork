@@ -15,7 +15,7 @@
     {#if results.length > 0}
         {results.length} results found.
     {:else}
-        No files found.
+        No results found.
     {/if}
 </div>
 

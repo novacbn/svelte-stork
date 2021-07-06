@@ -1,10 +1,7 @@
-<script lang="ts">
-    export let element: HTMLDivElement | null = null;
-
-    let _class: string = "";
-    export let style: string | undefined = undefined;
-
-    export {_class as class};
+<script lang="ts">export let element = null;
+let _class = "";
+export let style = undefined;
+export { _class as class };
 </script>
 
 <div bind:this={element} class="svst-attribution {_class}" {style}>

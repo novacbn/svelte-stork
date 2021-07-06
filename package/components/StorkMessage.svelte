@@ -1,21 +1,16 @@
-<script lang="ts">
-    import type {IStorkResult} from "../stores/search";
-
-    export let element: HTMLDivElement | null = null;
-
-    let _class: string = "";
-    export let style: string | undefined = undefined;
-
-    export {_class as class};
-
-    export let results: IStorkResult[];
+<script lang="ts">;
+export let element = null;
+let _class = "";
+export let style = undefined;
+export { _class as class };
+export let results;
 </script>
 
 <div bind:this={element} class="svst-message {_class}" {style}>
     {#if results.length > 0}
         {results.length} results found.
     {:else}
-        No files found.
+        No results found.
     {/if}
 </div>
 

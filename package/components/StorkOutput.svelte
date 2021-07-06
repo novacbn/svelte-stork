@@ -1,31 +1,23 @@
-<script lang="ts">
-    import type {IStorkQuery, IStorkResult} from "../stores/search";
-
-    import Attribution from "./StorkAttribution.svelte";
-    import Message from "./StorkMessage.svelte";
-    import Results from "./StorkResults.svelte";
-
-    export let element: HTMLDivElement | null = null;
-
-    let _class: string = "";
-    export let style: string | undefined = undefined;
-
-    export {_class as class};
-
-    export let excerpts_maximum: number = -1;
-    export let query: IStorkQuery | undefined = undefined;
-    export let results: IStorkResult[] | undefined = undefined;
-    export let results_maximum: number = -1;
-
-    // NOTE: Sometimes the end-developer might want to do custom ordering
-    // here. So we allow them to override what's passed in
-    let _results: IStorkResult[];
-    $: _results = results ? results : query ? query.results : [];
-
-    $: _results =
-        results_maximum > -1
-            ? _results.filter((result, index) => index < results_maximum)
-            : _results;
+<script lang="ts">;
+import Attribution from "./StorkAttribution.svelte";
+import Message from "./StorkMessage.svelte";
+import Results from "./StorkResults.svelte";
+export let element = null;
+let _class = "";
+export let style = undefined;
+export { _class as class };
+export let excerpts_maximum = -1;
+export let query = undefined;
+export let results = undefined;
+export let results_maximum = -1;
+// NOTE: Sometimes the end-developer might want to do custom ordering
+// here. So we allow them to override what's passed in
+let _results;
+$: _results = results ? results : query ? query.results : [];
+$: _results =
+    results_maximum > -1
+        ? _results.filter((result, index) => index < results_maximum)
+        : _results;
 </script>
 
 <div bind:this={element} class="svst-output {_class}" {style}>

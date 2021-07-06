@@ -1,7 +1,7 @@
 {
     "name": "@novacbn/svelte-stork",
     "description": "Minimalist Svelte wrapper Stores around Stork search, also provides customizable Components.",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "author": "novacbn",
     "type": "module",
     "main": "package/index.js",
@@ -30,9 +30,8 @@
         "components.d.ts"
     ],
     "scripts": {
-        "build": "npm run test && npm run build:lib && npm run build:types",
+        "build": "npm run test && npm run build:lib",
         "build:lib": "svelte-kit package",
-        "build:types": "tsc --emitDeclarationOnly",
         "build:typedoc": "typedoc --out ./package/docs/api --exclude '**/index.ts' --stripInternal --target es6 --theme minimal --mode modules src",
         "test": "npm run test:types && npm run test:svelte",
         "test:svelte": "svelte-check --tsconfig ./tsconfig.json",
@@ -42,7 +41,7 @@
         "svelte": "^3.38.3"
     },
     "devDependencies": {
-        "@sveltejs/kit": "^1.0.0-next.120",
+        "@sveltejs/kit": "^1.0.0-next.121",
         "@tsconfig/svelte": "^2.0.1",
         "prettier": "^2.3.2",
         "svelte-check": "^2.2.0",

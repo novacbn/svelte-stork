@@ -1,16 +1,11 @@
-<script lang="ts">
-    import type {IStorkQuery, IStorkResult} from "../stores/search";
-
-    import Result from "./StorkResult.svelte";
-
-    export let element: HTMLUListElement | null = null;
-
-    let _class: string = "";
-    export let style: string | undefined = undefined;
-
-    export let excerpts_maximum: number = -1;
-    export let results: IStorkResult[];
-    export let query: IStorkQuery;
+<script lang="ts">;
+import Result from "./StorkResult.svelte";
+export let element = null;
+let _class = "";
+export let style = undefined;
+export let excerpts_maximum = -1;
+export let results;
+export let query;
 </script>
 
 <ul bind:this={element} class="svst-results {_class}" {style}>
