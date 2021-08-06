@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## v0.0.5 - UNRELEASED
+## v0.0.5 - 2021/08/06
 
 -   Initial NPM version published to `@novacbn/svelte-stork`.
 -   Upgraded to `@sveltejs/kit`, `1.0.0-next.120` -> `1.0.0-next.142`.
