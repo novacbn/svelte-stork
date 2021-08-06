@@ -24,7 +24,7 @@
         "vite-plugin-markdown": "^2.0.2"
     },
     "dependencies": {
-        "@novacbn/svelte-stork": "file:..",
+        "@novacbn/svelte-stork": "file:../package",
         "chota": "^0.8.0",
         "prismjs": "^1.23.0"
     }
