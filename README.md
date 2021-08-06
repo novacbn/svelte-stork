@@ -2,7 +2,7 @@
 
 ## Description
 
-Minimalist Svelte wrapper Stores around [Stork Search](https://github.com/jameslittle230/stork), also provides customizable Components.
+Minimalist wrapper Svelte Stores around [Stork Search](https://github.com/jameslittle230/stork), also provides customizable Components.
 
 ## Demo
 
