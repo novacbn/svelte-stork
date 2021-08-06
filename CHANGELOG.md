@@ -2,7 +2,7 @@
 
 ## v0.0.5 -
 
--   Upgraded to `@sveltejs/kit`, `1.0.0-next.120` -> `1.0.0-next.121`.
+-   Upgraded to `@sveltejs/kit`, `1.0.0-next.120` -> `1.0.0-next.142`.
 -   Changed `No files found.` -> `No results found.`.
 -   Generated typedefs for Components.
 
