@@ -13,7 +13,8 @@ export default {
         target: "body",
 
         paths: {
-            //  base: "/svelte-stork",
+            assets: "/svelte-stork",
+            base: "/svelte-stork",
         },
 
         vite: () => {
