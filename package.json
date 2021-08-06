@@ -11,6 +11,10 @@
         "./components": "./components/index.js",
         "./package.json": "./package.json"
     },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/novacbn/svelte-stork"
+    },
     "keywords": [
         "search",
         "stork",
