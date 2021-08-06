@@ -1,6 +1,5 @@
-node_modules/
-package/package.json
-package/README.md
+/node_modules/
+/package/
 
 /docs/.svelte-kit
 /docs/build
