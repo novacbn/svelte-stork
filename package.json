@@ -1,14 +1,15 @@
 {
     "name": "@novacbn/svelte-stork",
-    "description": "Minimalist Svelte wrapper Stores around Stork search, also provides customizable Components.",
+    "description": "Minimalist wrapper Svelte Stores around Stork Search, also provides customizable Components.",
     "version": "0.0.5",
     "author": "novacbn",
     "type": "module",
-    "main": "package/index.js",
-    "typings": "package/types/index.d.ts",
+    "main": "index.js",
+    "svelte": "index.js",
+    "types": "index.d.ts",
     "exports": {
-        ".": "./package/index.js",
-        "./components": "./components.js"
+        ".": "./index.js",
+        "./package.json": "./package.json"
     },
     "keywords": [
         "search",
@@ -18,21 +19,24 @@
         "svelte-stores"
     ],
     "files": [
-        "package/components",
-        "package/stores",
-        "package/stork",
-        "package/util",
-        "package/types",
-        "package/index.js",
-        "package.json",
-        "index.d.ts",
-        "components.js",
-        "components.d.ts"
+        "components",
+        "stores",
+        "stork",
+        "util",
+        "CHANGELOG.md",
+        "LICENSE",
+        "index.js",
+        "index.d.ts"
     ],
     "scripts": {
-        "build": "npm run test && npm run build:lib",
-        "build:lib": "svelte-kit package",
-        "build:typedoc": "typedoc --out ./package/docs/api --exclude '**/index.ts' --stripInternal --target es6 --theme minimal --mode modules src",
+        "format": "prettier --config .prettierrc --write ./",
+        "lint": "npm run lint:format",
+        "lint:format": "prettier --config .prettierrc --check ./",
+        "package": "npm run lint && npm run test && npm run package:lib",
+        "package:lib": "svelte-kit package",
+        "postversion": "git push && git push --tags && npm run release",
+        "release": "npm run package && npm run release:publish",
+        "release:publish": "npm publish ./package",
         "test": "npm run test:types && npm run test:svelte",
         "test:svelte": "svelte-check --tsconfig ./tsconfig.json",
         "test:types": "tsc --noEmit"

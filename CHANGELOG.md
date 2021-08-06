@@ -1,7 +1,8 @@
 # CHANGELOG
 
-## v0.0.5 -
+## v0.0.5 - UNRELEASED
 
+-   Initial NPM version published to `@novacbn/svelte-stork`.
 -   Upgraded to `@sveltejs/kit`, `1.0.0-next.120` -> `1.0.0-next.142`.
 -   Changed `No files found.` -> `No results found.`.
 -   Generated typedefs for Components.
