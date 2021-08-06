@@ -29,6 +29,7 @@
         "util",
         "CHANGELOG.md",
         "LICENSE",
+        "README.md",
         "index.js",
         "index.d.ts"
     ],
