@@ -1,5 +1,7 @@
 <script lang="ts">
     import type {IStorkHighlightRange} from "../stores/search";
+    import type {ITextRange} from "../util/string";
+    import {highlight_ranges} from "../util/string";
 
     let _class: string = "";
     export let style: string | undefined = undefined;
@@ -9,36 +11,17 @@
     export let ranges: IStorkHighlightRange[] = [];
     export let text: string;
 
-    let _parts: [string, boolean][];
+    let _parts: ITextRange[];
     $: _parts =
-        ranges.length > 0
-            ? ranges.reduce<[string, boolean][]>((accum, range, index) => {
-                  const {beginning, end} = range;
-
-                  if (index === 0 && beginning > 0) {
-                      accum.push([text.slice(0, beginning), false]);
-                  }
-
-                  accum.push([text.slice(beginning, end), true]);
-
-                  if (end < text.length - 1) {
-                      const next_range = ranges[index + 1];
-                      const next_end = next_range ? next_range.beginning : text.length;
-
-                      accum.push([text.slice(end, next_end), false]);
-                  }
-
-                  return accum;
-              }, [])
-            : [[text, false]];
+        ranges.length > 0 ? highlight_ranges(text, ranges) : [{is_highlighted: false, text}];
 </script>
 
-{#each _parts as [sub_text, is_highlighted]}
+{#each _parts as {is_highlighted, text}}
     {#if is_highlighted}
         <!-- prettier-ignore -->
-        <mark class="svst-highlight {_class}" {style}>{sub_text}</mark>
+        <mark class="svst-highlight {_class}" {style}>{text}</mark>
     {:else}
-        {sub_text}
+        {text}
     {/if}
 {/each}
 
