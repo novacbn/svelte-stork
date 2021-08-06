@@ -45,5 +45,6 @@
 <style>
     :global(.svst-highlight) {
         background-color: var(--svst-highlight-background-color, hsl(59, 98%, 58%));
+        color: var(--svst-highlight-color, currentColor);
     }
 </style>

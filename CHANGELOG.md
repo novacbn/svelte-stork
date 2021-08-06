@@ -4,13 +4,14 @@
 
 -   Initial NPM version published to `@novacbn/svelte-stork`.
 -   Upgraded to `@sveltejs/kit`, `1.0.0-next.120` -> `1.0.0-next.142`.
+-   Added `--svst-highlight-color` — Defaults to `currentColor`.
 -   Changed `No files found.` -> `No results found.`.
 -   Generated typedefs for Components.
 
 ## v0.0.4 - 2021/07/02
 
 -   Added `--svst-attribution-opacity` / `--svst-message-opacity` — Both default to `0.8`.
--   Changed `--svst-attribution-color` / `--svst-message-color` - Both default to `currentColor`.
+-   Changed `--svst-attribution-color` / `--svst-message-color` — Both default to `currentColor`.
 -   Changed `X files found.` -> `X results found.`.
 -   Fixed `--svst-font-size` -> `--svst-output-font-size`, `--svst-font-weight` -> `--svst-output-font-weight`.
 -   Generated typedefs for core library.

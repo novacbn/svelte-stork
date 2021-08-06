@@ -161,6 +161,7 @@ npm install github:novacbn/svelte-stork
 | `--svst-excerpt-spacing`              | `0.8em`                                                                                                                      |
 | <hr />                                | <hr />                                                                                                                       |
 | `--svst-highlight-background-color`   | `hsl(59, 98%, 58%)`                                                                                                          |
+| `--svst-highlight-color`              | `currentColor`                                                                                                               |
 | <hr />                                | <hr />                                                                                                                       |
 | `--svst-message-color`                | `currentColor`                                                                                                               |
 | `--svst-message-padding`              | `0.5em 1em`                                                                                                                  |
