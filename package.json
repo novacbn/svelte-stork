@@ -5,10 +5,10 @@
     "author": "novacbn",
     "type": "module",
     "main": "index.js",
-    "svelte": "index.js",
     "types": "index.d.ts",
     "exports": {
         ".": "./index.js",
+        "./components": "./components/index.js",
         "./package.json": "./package.json"
     },
     "keywords": [
