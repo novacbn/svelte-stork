@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## v0.0.6 - UNRELEASED
+## v0.0.6 - 2021/08/09
 
 -   Added `<Output entry_behavior="auto/external/internal">` property — Controls if entry anchors are set with `target="_blank"` / `rel="noopener noreferrer"`.
 -   Added `selectable({output: HTMLElement})` Svelte Action — Used to select / highlight previous entries within an `<Output>` Component via hotkeys.
