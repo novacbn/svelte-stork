@@ -2,6 +2,7 @@
     import type {IStorkQuery, IStorkResult} from "../stores/search";
 
     import Attribution from "./StorkAttribution.svelte";
+    import {ENTRY_BEHAVIOR} from "./StorkEntry.svelte";
     import Message from "./StorkMessage.svelte";
     import Results from "./StorkResults.svelte";
 
@@ -12,6 +13,7 @@
 
     export {_class as class};
 
+    export let entry_behavior: keyof typeof ENTRY_BEHAVIOR = ENTRY_BEHAVIOR.auto;
     export let excerpts_maximum: number = -1;
     export let query: IStorkQuery | undefined = undefined;
     export let results: IStorkResult[] | undefined = undefined;
@@ -34,7 +36,7 @@
     {/if}
 
     {#if query && _results.length > 0}
-        <Results results={_results} {excerpts_maximum} {query} />
+        <Results results={_results} {entry_behavior} {excerpts_maximum} {query} />
     {/if}
 
     <Attribution />

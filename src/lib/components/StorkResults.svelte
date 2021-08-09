@@ -1,6 +1,7 @@
 <script lang="ts">
     import type {IStorkQuery, IStorkResult} from "../stores/search";
 
+    import {ENTRY_BEHAVIOR} from "./StorkEntry.svelte";
     import Result from "./StorkResult.svelte";
 
     export let element: HTMLUListElement | null = null;
@@ -8,6 +9,9 @@
     let _class: string = "";
     export let style: string | undefined = undefined;
 
+    export {_class as class};
+
+    export let entry_behavior: keyof typeof ENTRY_BEHAVIOR = ENTRY_BEHAVIOR.auto;
     export let excerpts_maximum: number = -1;
     export let results: IStorkResult[];
     export let query: IStorkQuery;
@@ -15,7 +19,7 @@
 
 <ul bind:this={element} class="svst-results {_class}" {style}>
     {#each results as result (result.entry.url)}
-        <Result {excerpts_maximum} {query} {result} />
+        <Result {entry_behavior} {excerpts_maximum} {query} {result} />
     {/each}
 </ul>
 
