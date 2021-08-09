@@ -1,7 +1,7 @@
 {
     "name": "@novacbn/svelte-stork",
     "description": "Minimalist wrapper Svelte Stores around Stork Search, also provides customizable Components.",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "author": "novacbn",
     "type": "module",
     "main": "index.js",
