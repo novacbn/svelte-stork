@@ -81,11 +81,14 @@ store.subscribe((query) => {
 <!-- prettier-ignore -->
 ```html
 <script>
-    import {search} from "svelte-stork";
+    import {search, selectable} from "svelte-stork";
     import * as Stork from "svelte-stork/components";
 
     // Just input the same options you passed into the Javascript sample
     const store = search(...);
+
+    // This caches the `HTMLElement` reference to the `<div>` element from `<Output>`
+    let output = null;
 
     let value = "";
 
@@ -95,8 +98,18 @@ store.subscribe((query) => {
     $: query = $store;
 </script>
 
+<!--
+    By using the `selectable` Svelte Action here, this will allow the end-user
+    to select the next / previous highlighted result entries via their arrow keys.
+    And also be able to navigate to the highlighted entry via the enter key
+-->
 
-<input type="text" placeholder="...search" bind:value />
+<input
+    type="text"
+    placeholder="...search"
+    bind:value
+    use:selectable={{output}}
+/>
 
 <!--
     Now we can just pass in the query output into the built-in basic search UI
@@ -107,6 +120,7 @@ store.subscribe((query) => {
 -->
 
 <Stork.Output
+    bind:element={output}
     excerpts_maximum={-1}
     results_maximum={-1} 
     {query}
