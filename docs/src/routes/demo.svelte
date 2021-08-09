@@ -26,9 +26,10 @@
 <script>
     import {browser} from "$app/env";
 
-    import {search} from "@novacbn/svelte-stork";
+    import {search, selectable} from "@novacbn/svelte-stork";
     import * as Stork from "@novacbn/svelte-stork/components";
 
+    let output = null;
     let value = "";
 
     async function await_initialize() {
@@ -59,14 +60,21 @@
         </label>
 
         <p class="grouped">
-            <input id="search" type="search" placeholder="liberty" bind:value />
+            <input
+                id="search"
+                type="search"
+                placeholder="liberty"
+                bind:value
+                use:selectable={{output}}
+            />
+
             <button class="button error" disabled={!value} on:click={() => (value = "")}>X</button>
         </p>
 
         <small>* Well, just the first twenty.</small>
 
         <div class="card is-paddingless">
-            <Stork.Output query={_query} />
+            <Stork.Output bind:element={output} entry_behavior="internal" query={_query} />
         </div>
     {:catch err}
         <div class="card bd-error text-error">
