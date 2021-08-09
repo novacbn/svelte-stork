@@ -2,20 +2,31 @@ export function debounce<F extends (...args: any[]) => void | Promise<void>>(
     func: F,
     duration: number = 0
 ): (...args: Parameters<F>) => void | Promise<void> {
-    let destroy: (() => void) | null;
+    let identifier: number | undefined;
 
     return (...args: any[]) => {
-        if (destroy) {
-            destroy();
-            destroy = null;
+        if (identifier !== undefined) {
+            clearTimeout(identifier);
+            identifier = undefined;
         }
 
-        destroy = timeout(() => func(...args), duration);
+        // @ts-ignore - HACK: NodeJS doesn't follow spec
+        identifier = setTimeout(() => func(...args), duration);
     };
 }
 
-export function timeout(callback: () => void, duration: number = 0): () => void {
-    const identifier = setTimeout(() => callback(), duration);
+export function throttle<F extends (...args: any[]) => void | Promise<void>>(
+    func: F,
+    duration: number = 0
+): (...args: Parameters<F>) => void | Promise<void> {
+    let identifier: number | undefined;
 
-    return () => clearTimeout(identifier);
+    return (...args: any[]) => {
+        if (identifier === undefined) {
+            func(...args);
+
+            // @ts-ignore - HACK: NodeJS doesn't follow spec
+            identifier = setTimeout(() => (identifier = undefined), duration);
+        }
+    };
 }
